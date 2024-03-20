@@ -29,6 +29,7 @@ const Data_freequences = [
   { label: '5 Min', value: '5' },
   { label: '1 Hrs', value: '60' },
   { label: '1 Day', value: '1440' },
+  { label: '2 Days', value: '2880' },
   { label: '7 Days', value: '10080' },
   { label: '15 Days', value: '21600' },
 ];
@@ -79,6 +80,7 @@ const Rcards = ({device_data,devicename}) => {
   const thickness_int = parseInt(rounded_percentage);
 
 
+
 let time_data;
 if(parseInt(usertime)===1440){
   time_data = "1 Day"
@@ -87,6 +89,9 @@ if(parseInt(usertime)===1440){
 }
 else if(parseInt(usertime)===60){
   time_data="1 hrs"
+}
+else if(parseInt(usertime)===2880){
+  time_data="2 Days"
 }
 else if(parseInt(usertime)===10080){
   time_data="7 Days"
@@ -184,6 +189,7 @@ const Device_error =()=>{
 
   const handle_dropdown_Change = async(selectedOption) => {
     try {
+      console.log(selectedOption.value);
       let dayValue;
       if (selectedOption.value === "5"){
         dayValue = 5;
@@ -194,12 +200,16 @@ const Device_error =()=>{
       else if(selectedOption.value === "1440"){
         dayValue = 1440;
       }
+      else if(selectedOption.value === "2880"){
+        dayValue = 2880;
+      }
       else if(selectedOption.value === "10080"){
         dayValue = 10080;
       }
       else if(selectedOption.value === "21600"){
         dayValue = 21600;
       }
+     
       setDropdown(dayValue);
     } catch (error) {
       console.error(error);
@@ -231,7 +241,7 @@ const Device_error =()=>{
         {/* ${rounded_percentage <= 50 ? 'bg-red-500' :  rounded_percentage <= 75 ? 'bg-[#ED7014]': rounded_percentage <=100 ? 'bg-[#28a33d]' :rounded_percentage>device_thickness? "bg-[#0A99DF]": 'bg-[#0A99DF]'}  */}
       </div>
       <div className="mt-2">
-        <div className={`flex card border-4 flex-col items-center p-4  rounded-lg shadow-md mb-2 sm:flex-row  ${finaly_thickness === true ? "bg-[#0A99DF]":rounded_percentage <= 50 ? 'bg-red-500' :  rounded_percentage <= 75 ? 'bg-[#ED7014]': rounded_percentage <=100 ? 'bg-[#28a33d]' : 'bg-[#0A99DF]'} `}>
+        <div className={`flex card border-4 flex-col items-center p-4  rounded-lg shadow-md mb-2 sm:flex-row  ${finaly_thickness === true ? "bg-[#0A99DF]" :rounded_percentage <= parseFloat(50) ? 'bg-red-500' :  rounded_percentage <= parseFloat(75) ? 'bg-[#ED7014]': rounded_percentage <=parseFloat(100) ? 'bg-[#28a33d]' : 'bg-[#0A99DF]'} `}>
           <div className={`p-3 mr-4 text-blue-500 bg-blue-100 rounded-full sm:mb-0`}>
             <svg className="h-10" fill="currentColor" viewBox="-1 -2 18 18">
               <TbRulerMeasure />
