@@ -3,7 +3,7 @@ import { register,
     login,DeviceName,input,
     limit,limitdata,
     LastUpdated_data,fetchAllData,insertData,BulkData,
-devicelast_datas,getdata} from "../controller/alldata.js";
+devicelast_datas,getdata,devicedata} from "../controller/alldata.js";
 
 const router = express.Router();
 
@@ -15,6 +15,7 @@ router.post("/input",input)
 
 
 //fetch chart value api missing
+router.get('/deviceData',devicedata)
 router.get("/BulkData",BulkData)
 router.get("/DeviceName",DeviceName)
 router.post("/limit",limit)

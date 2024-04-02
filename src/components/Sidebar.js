@@ -29,9 +29,9 @@ const Sidebar = () => {
     localStorage.removeItem('token')
     window.location.href = '/'
   }
-
+  const isMobileDevice = window.innerWidth <= 768;
   return (
-    <div className={`${open ? "w-42" : "w-20"} bg-dark_color p-5 pt-8 height relative duration-300`}>
+    <div className={`${open ? (isMobileDevice ? "w-42 h-[280vh]" : "w-42 h-screen") : (isMobileDevice ? "w-20 h-[280vh]" : "w-20 h-screen")} bg-dark_color p-5 pt-8  relative duration-300`}>
       <img src={control} className={`absolute cursor-pointer -right-3 top-9 w-7 border-dark_color border-2 rounded-full ${!open && "rotate-180"}`}
         onClick={() => setOpen(!open)}
       />

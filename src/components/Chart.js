@@ -1,6 +1,13 @@
 import React from "react";
-import ReactApexChart from "react-apexcharts";
+import { Line } from "react-chartjs-2";
 import Select from 'react-select';
+import { Chart as ChartJS,LineElement,CategoryScale,LinearScale,PointElement } from "chart.js";
+ChartJS.register(
+  LineElement,CategoryScale,LinearScale,PointElement
+)
+
+
+
 const Chart = (chartdata) => {
   const filterdata = chartdata.chartdata;
   const thickness = filterdata.map(item => item.thickness);
@@ -9,88 +16,19 @@ const Chart = (chartdata) => {
   const battery = filterdata.map(item => {
     const values = item.battery_status.split(','); 
     const firstValue = parseInt(values[0]);
-    let Battery_percentage = (firstValue - 265) * (100 - 0) / (540 - 265) + 0;
+    let Battery_percentage = (firstValue - 437) * (100 - 0) / (776 - 437) + 0;
     Battery_percentage = Battery_percentage > 100 ? 100 : Battery_percentage < 0 ? 0 : Battery_percentage;
     Battery_percentage = Number(Battery_percentage.toFixed(2));
     return Battery_percentage; 
   });
 
+
+
+  
+
   const time = filterdata.map(item => item.timestamp);
 
-  const options = {
-    series: [{
-      name: 'Thickness',
-      data: thickness
-    }, {
-      name: 'Battery',
-      data: battery
-    }],
-    chart: {
-      type: 'bar',
-      height: 350,
-    },
-    plotOptions: {
-      bar: {
-        horizontal: false,
-        columnWidth: '55%',
-        endingShape: 'rounded'
-      },
-    },
-    dataLabels: {
-      enabled: false
-    },
-    responsive: [{
-      breakpoint: 480,
-      options: {
-        legend: {
-          position: 'bottom',
-          offsetX: -10,
-          offsetY: 0
-        }
-      }
-    }],
-    stroke: {
-      show: true,
-      width: 2,
-      colors: ['transparent']
-    },
-    xaxis: {
-      categories: time,
-      labels: {
-        style: {
-          colors: '#ffffff' 
-        }
-      }
-    },
-    yaxis: {
-      title: {
-        text: 'Thickness (0 t0 100mm) & Battery (%)',
-        style: {
-          color: '#ffffff' 
-        }
-      },
-      labels: {
-        style: {
-          colors: '#ffffff' 
-        }
-      }
-    },
-    fill: {
-      opacity: 1
-    },
-    tooltip: {
-      y: {
-        formatter: function (val) {
-          return val
-        }
-      }
-    },
-    legend: {
-      labels: {
-        colors: '#ffffff' 
-      }
-    },
-  };
+  
   const Data_freequences = [
     { label: 'XY00001', value: 'XY00001' },
     { label: 'XY00002', value: 'XY00002' },
@@ -122,6 +60,45 @@ const Chart = (chartdata) => {
   const handle_dropdown_Change = async(selectedOption) => {
     localStorage.setItem("ChartId",selectedOption.value)
   }
+
+  const data={
+    labels:time,
+    datasets:[
+      {
+        data:thickness,
+        backgroundColor:'transparent',
+        borderColor:'#08B8FF',
+        pointBorderColor:'transparent',
+      },
+      {
+        data: battery ,
+        backgroundColor: 'transparent',
+        borderColor: '#FF5733', 
+        pointBorderColor: 'transparent',
+      },
+    ]
+  }
+  const options = {
+    scales: {
+      y: {
+        grid: {
+          color: 'rgba(255, 255, 255, 0.2)', // Color of the y-axis grid lines
+        },
+        ticks: {
+          color: '#ffffff', // Color of the y-axis labels
+        },
+      },
+      x: {
+        grid: {
+          color: 'rgba(255, 255, 255, 0.2)', // Color of the x-axis grid lines
+        },
+        ticks: {
+          color: '#ffffff', // Color of the x-axis labels
+        },
+      },
+    },
+  };
+  console.log("time",time)
   return (
     <div className="chart_page">
       <div id="chart" className="bg-[#42426e] ml-4 mr-4 mt-4 rounded-lg ">
@@ -132,7 +109,7 @@ const Chart = (chartdata) => {
           </div>
          
         </div>
-        <ReactApexChart options={options} series={options.series} type="bar" height={450} />
+        <Line className="ml-10 w-full h-full" data={data} options={options}></Line>
       </div>
     </div>
   );

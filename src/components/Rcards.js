@@ -25,6 +25,8 @@ const circle = {
 
 
 
+
+
 const Data_freequences = [
   { label: '5 Min', value: '5' },
   { label: '1 Hrs', value: '60' },
@@ -60,25 +62,33 @@ const customStyles_2 = {
 const Rcards = ({device_data,devicename}) => {
 
   const[dropdowndata,setDropdown]=useState([]);
+  const[show_error_popup,setPopu1]= useState(false);
+  const[show_error_popup2,setPopup2]= useState(false);
+  const[show_error_popup3,setPopup3]= useState(false);
+  const[show_error_popup4,setPopup4]= useState(false);
+  const[show_error_popup5,setPopup5]= useState(false);
   const inputRef = useRef(null);
+
   const device_Datas = device_data[0]
+//device filter
+
   const deviceName = device_Datas ? device_Datas.device_name: 'N/A';
   const thickness = device_Datas ? device_Datas.thickness : 'N/A';
   const device_temp = device_Datas ? device_Datas.device_status : 'N/A';
   const signal = device_Datas ? device_Datas.signal_strength : 'N/A';
   const battery = device_Datas ? device_Datas.battery_status : 'N/A';
   const time = device_Datas ? device_Datas.timestamp : 'N/A';
+
   const device_thickness = devicename ? devicename.limit : "N/A";
   const usertime=devicename?devicename.time:"N/A"
 
 
-  const intconvert = parseInt(thickness)
+  const intconvert = parseFloat(thickness)
 
-  const limitvalue = ((intconvert-0)*(100-0))/(device_thickness-0)+0;
+  const limitvalue = ((intconvert-0)*(100-0))/(parseFloat(device_thickness)-0)+0;
   const rounded_value = limitvalue.toFixed(2);
-  const rounded_percentage = parseFloat(rounded_value);
-  const thickness_int = parseInt(rounded_percentage);
 
+  const rounded_percentage = parseFloat(rounded_value);
 
 
 let time_data;
@@ -100,11 +110,10 @@ else if(parseInt(usertime)===21600){
   time_data="15 Days"
 }
 
-//battery percentage
+
 const Current_battery = battery.split(",");
-const Battery_percentage = (Current_battery[0] - 265) * (100 - 0) / (540 - 265) + 0;
+const Battery_percentage = (Current_battery[0] - 437) * (100 - 0) / (776 - 437) + 0;
 const Battery_Percentage_Value =parseInt(Battery_percentage)
- 
 //convert a signal to percentage
 
 const signal_percentage= (signal - 0)*(100 - 0 )/(32 - 0)+0;
@@ -166,7 +175,6 @@ const Device_error =()=>{
       Device_error()
     } else {
       try{
-        console.log(deviceName)
         const response = await fetch('https://cumi.xyma.live/backend/limit',{
           method:'POST',
           headers:{
@@ -189,7 +197,6 @@ const Device_error =()=>{
 
   const handle_dropdown_Change = async(selectedOption) => {
     try {
-      console.log(selectedOption.value);
       let dayValue;
       if (selectedOption.value === "5"){
         dayValue = 5;
@@ -216,21 +223,45 @@ const Device_error =()=>{
     }
   }
 
-  const finaly_thickness = thickness > device_thickness
+  let devicethickness_value = parseFloat(device_thickness)+parseFloat(2)
+  const finaly_thickness = parseFloat(thickness)> (devicethickness_value)
+  let red_color_card = rounded_value <= parseFloat(50)
+  let orange_color_card=rounded_value >= parseFloat(51) &&rounded_value < parseFloat(75)
+  let green_color_Card = rounded_value >=parseFloat(76)  && rounded_value <=parseFloat(100)
+
+  useEffect(() => {
+    if (finaly_thickness === true) {
+      setPopu1(true);
+    }
+    if (parseFloat(thickness) === parseFloat(0)) {
+      setPopup2(true);
+    }
+    if (parseFloat(thickness) === parseFloat(9999.00)) {
+      setPopup3(true);
+    }
+  }, [finaly_thickness,thickness]);
+
+  const handleClosePopup = () => {
+    setPopu1(false);
+    setPopup2(false);
+    setPopup3(false);
+    setPopup4(false);
+
+  };
 
 
   return (
-    <div className="max-w-screen-lg mx-auto">
+    <div className="max-w-screen-lg mx-auto ml-4 mr-2">
       <div className="flex items-end justify-end">
         <p className="text-xs font-bold mb-3 mr-2">Last-Data :<span className="text-red-500 font-bold">{time}</span></p>
         <Select  className="w-44" options={Data_freequences} styles={customStyles_2} isSearchable={true}  placeholder={`Clockify -${time_data} `} onChange={handle_dropdown_Change} />
+ 
         <input
-          type="text"
-          ref={inputRef}
-          className="ml-3 rounded-lg w-[20%] h-9 border border-black"
-          placeholder="Thickness"
-       
-        />
+              type="number"
+              className=" h-9  bg-gray-50 border border-gray-300 text-gray-900 ml-2 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[20%] ps-1 p-2.5   dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              placeholder="Thickness"
+              ref={inputRef}
+            />
         <button onClick={handleSubmit} 
           type="button"
           className="mr-3 ml-3 inline-block w-20 h-9 font-bold text-center bg-gradient-to-tl from-purple-700 to-pink-500 uppercase align-middle transition-all rounded-lg cursor-pointer leading-pro text-xs ease-soft-in tracking-tight-soft shadow-soft-md bg-150 bg-x-25 hover:scale-102 active:opacity-85 hover:shadow-soft-xs text-white"
@@ -241,7 +272,12 @@ const Device_error =()=>{
         {/* ${rounded_percentage <= 50 ? 'bg-red-500' :  rounded_percentage <= 75 ? 'bg-[#ED7014]': rounded_percentage <=100 ? 'bg-[#28a33d]' :rounded_percentage>device_thickness? "bg-[#0A99DF]": 'bg-[#0A99DF]'}  */}
       </div>
       <div className="mt-2">
-        <div className={`flex card border-4 flex-col items-center p-4  rounded-lg shadow-md mb-2 sm:flex-row  ${finaly_thickness === true ? "bg-[#0A99DF]" :rounded_percentage <= parseFloat(50) ? 'bg-red-500' :  rounded_percentage <= parseFloat(75) ? 'bg-[#ED7014]': rounded_percentage <=parseFloat(100) ? 'bg-[#28a33d]' : 'bg-[#0A99DF]'} `}>
+        <div className={`flex card border-4 flex-col items-center p-4  rounded-lg shadow-md mb-2 sm:flex-row 
+         ${
+        rounded_value < parseFloat(50) ? 'bg-red-500' : 
+        rounded_value >= parseFloat(50) && rounded_value  < parseFloat(75) ? 'bg-[#ED7014]': 
+        rounded_value >= parseFloat(75) && finaly_thickness === false ? 'bg-[#28a33d]' : 
+         'bg-[#0A99DF]'} `}>
           <div className={`p-3 mr-4 text-blue-500 bg-blue-100 rounded-full sm:mb-0`}>
             <svg className="h-10" fill="currentColor" viewBox="-1 -2 18 18">
               <TbRulerMeasure />
@@ -249,7 +285,7 @@ const Device_error =()=>{
           </div>
           <div className="text-center flex-grow"> {/* Center content vertically */}
             <div className="text-2xl font-medium text-gray-600">
-              <p className="text-2xl font-bold card_size text-white mt-1">{finaly_thickness === true?"OverLimit":parseInt(thickness) === 0 ? "⚠️ ER01" :parseInt(thickness) === 999 ?"⚠️ ER02" : thickness_int + "%"}</p>
+              <p className="text-2xl font-bold card_size text-white mt-1">{parseFloat(thickness) === parseFloat(0)? "⚠️ ER01" :parseFloat(thickness) === parseFloat(9999.00) ? "⚠️ ER02" : finaly_thickness === true ? "OverLimit" : rounded_value + "%"}</p>
               <p className="mt-1 text-lg text-white">Thickness</p>
             </div>
           </div>
@@ -260,7 +296,7 @@ const Device_error =()=>{
       </div>
 
       <div className="grid gap-4 md:grid-cols-3 xl:grid-cols-3 sm:grid-cols-1 mb-5">
-        <div className={`flex flex-col border-4 ${device_temp > 65 ? 'border-red-500 blink-border' : 'border-white' } card items-center p-4 bg-gray-50 rounded-lg shadow-md mb-4 sm:flex-row`}>
+        <div className={`flex flex-col border-4 ${parseFloat(device_temp) > 65 || parseFloat(device_temp) < 0  ? 'border-red-500 blink-border' : 'border-white' } card items-center p-4 bg-gray-50 rounded-lg shadow-md mb-4 sm:flex-row`}>
           <div className="p-3 mb-2 mr-4 text-green-500 bg-green-100 rounded-full sm:mb-0">
             <svg className="w-6 h-6" fill="currentColor" viewBox="-1 -2 18 18">
               <FaTemperatureLow />
@@ -273,7 +309,7 @@ const Device_error =()=>{
           </div>
         </div>
 
-        <div className={`flex flex-col border-4 ${signal_percentage_convert === 0?'border-red-500 blink-border':'border-white'} border-white card items-center p-4 bg-gray-50 rounded-lg shadow-md mb-4 sm:flex-row`}>
+        <div className={`flex flex-col border-4 ${signal_percentage_convert <= 10?'border-red-500 blink-border':'border-white'} border-white card items-center p-4 bg-gray-50 rounded-lg shadow-md mb-4 sm:flex-row`}>
           <div className="p-3 mb-2 mr-4 text-red-500 bg-red-100 rounded-full sm:mb-0">
             <svg className="w-5 h-5" fill="currentColor" viewBox="-1 -2 18 18">
               <FaSignal />
@@ -296,14 +332,68 @@ const Device_error =()=>{
               <PiBatteryFullFill />
             </svg>
           </div>
-          <div className="text-sm font-medium text-gray-600 text-center sm:text-left">
-          <p className="text-lg card_size font-bold text-gray-700 mt-1">{Battery_Percentage_Value >= 100 ? "100 %" : Battery_Percentage_Value < 0 ? "0 %" : Battery_Percentage_Value + "%"}</p>
-
+          <div className="text-sm font-medium  text-gray-600 text-center sm:text-left">
+            <p className="text-lg card_size font-bold text-gray-700 mt-1">{Battery_Percentage_Value >= 100 ? "100 %" : Battery_Percentage_Value < 0 ? "0 %" : Battery_Percentage_Value + "%"}</p>
             <p className="mt-1">Battery Level</p>
           </div>
         </div>
       </div>
+      
+      {show_error_popup &&(
+         <div className='popup' id='popup-1'>
+         <div className='overlay'></div>
+         <div className='content'>
+           <div className='close-btn' onClick={handleClosePopup}>&times;</div>
+           <h1 className="font-bold text-2xl text-emerald-500">OverLimit</h1>
+           <p className="mt-2">Kindly Check with Maximum Thickness</p>
+         </div>
+       </div>
+      )}
+
+
+      {show_error_popup2 &&(
+         <div className='popup' id='popup-1'>
+         <div className='overlay'></div>
+         <div className='content'>
+           <div className='close-btn' onClick={handleClosePopup}>&times;</div>
+           <h1 className="font-bold text-2xl text-emerald-500">⚠️ ER01</h1>
+           <p className="mt-2">Fitment Issue</p>
+         </div>
+       </div>
+      )}
+
+      {show_error_popup3 &&(
+         <div className='popup' id='popup-1'>
+         <div className='overlay'></div>
+         <div className='content'>
+           <div className='close-btn' onClick={handleClosePopup}>&times;</div>
+           <h1 className="font-bold text-2xl text-emerald-500">⚠️ ER02</h1>
+           <p className="mt-2">Electronics Issue</p>
+         </div>
+       </div>
+      )}
+      {show_error_popup4 &&(
+         <div className='popup' id='popup-1'>
+         <div className='overlay'></div>
+         <div className='content'>
+           <div className='close-btn' onClick={handleClosePopup}>&times;</div>
+           <h1 className="font-bold text-2xl text-emerald-500">ERROR:<span>⚠️ ER04</span></h1>
+           <p className="mt-2">Kinldy Check With Maximum Thickness or Change the Brick</p>
+         </div>
+       </div>
+      )}
+      {show_error_popup5 &&(
+         <div className='popup' id='popup-1'>
+         <div className='overlay'></div>
+         <div className='content'>
+           <div className='close-btn' onClick={handleClosePopup}>&times;</div>
+           <h1 className="font-bold text-2xl text-emerald-500">OverLimit</h1>
+           <p className="mt-2">Kinldy Check With Maximum Thickness or Change the Brick</p>
+         </div>
+       </div>
+      )}
     </div>
+   
   );
 };
 

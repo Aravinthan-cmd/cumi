@@ -41,9 +41,9 @@ const time = Thickness_times?Thickness_times :"N/A";
   const options={
   }
   return (
-    <div className="bg-white ml-2 rounded-lg ">
+    <div className="bg-white ml-2 mr-2 rounded-lg ">
     <div className="">
-      <Line className="ml-10 w-96 h-32" data={data} options={options}></Line>
+      <Line className="ml-10 w-full h-full" data={data} options={options}></Line>
     </div>
     </div>
     

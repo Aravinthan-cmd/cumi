@@ -116,6 +116,19 @@ export const limit=  async (req, res) => {
       .catch(err => res.status(500).json({ error: err.message }));
   }
 
+  export const devicedata = async(req,res)=>{
+    try{
+      const limitResponse = await axios.get('https://cumi.xyma.live/backend/fetchAllData');
+      const device3 = limitResponse.data.find(item => item.devicename === "XY00003")
+      console.log(device3)
+
+    }catch(error){
+      console.log("error")
+    }
+    
+
+  }
+
   export const LastUpdated_data = async (req, res) => {
     try {
       const deviceNames = ['XY00001', 'XY00002','XY00003','XY00004'];
@@ -282,8 +295,6 @@ export const limit=  async (req, res) => {
         const limit = limitResponse.data.limt;
         const $ = "$";
         const spl = "#";
-      
-
         const date = new Date();
         const options = {
           year: 'numeric',
@@ -291,11 +302,13 @@ export const limit=  async (req, res) => {
           day: '2-digit',
           hour: '2-digit',
           minute: '2-digit',
+          second: '2-digit',
           hour12: true,
           timeZone: 'Asia/Kolkata',
         };
         const formattedTimestamp = date.toLocaleString('en-US', options);
 
+        console.log(formattedTimestamp);
         const responseData = [`#,${device1.devicename},${device1.limit},${device1.time},#,${device2.devicename},${device2.limit},${device2.time},#,${device3.devicename},${device3.limit},${device3.time},#,${device4.devicename},${device4.limit},${device4.time},#,${device5.devicename},${device5.limit},${device5.time}`];
         //const responseData = [String($),String(device1.devicename),String(device1.limit),Number(day),String(char), String(spl),String(device2.devicename),String(device2.limit),Number(day),String(at), String(char),String(device3.devicename),String(device3.limit),Number(day),String($), String(spl),String(device4.devicename),String(device4.limit),Number(day),String(char)];
         const newData = {
