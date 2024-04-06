@@ -30,77 +30,26 @@ const Navbar = ({device_data,Device_name,alldata_list}) => {
   const device5_data = device5 ? device5.thickness : 'N/A';
 
   
-let epoch_time_lastUpdated;
-if (device_lastime !== 'N/A') {
-    const dateParts = device_lastime.split(/\/|, |:| /);
-    const month = parseInt(dateParts[0]) - 1; 
-    const day = parseInt(dateParts[1]);
-    const year = parseInt(dateParts[2]);
-    const hour = dateParts[3] === '12' ? 0 : parseInt(dateParts[3]) + (dateParts[5] === 'PM' ? 12 : 0);
-    const minute = parseInt(dateParts[4]);
-    epoch_time_lastUpdated = new Date(year, month, day, hour, minute).getTime() / 1000;
-} else {
-    epoch_time_lastUpdated = 'N/A';
-}
+
+
+const device_lastimes = "04/06/2024, 05:43:55 AM";
+
+// Parse the date string
+const dateObject = new Date(device_lastime);
+
+const millisecondsSinceEpoch = dateObject.getTime();
+
+
+const secondsSinceEpoch = millisecondsSinceEpoch / 1000;
 
 
 
 
-// const isWorking = next_device_time <= current_time;
-//   function classNames(...classes) {
-//     return classes.filter(Boolean).join(" ");
-//   }
-
-//   const popupnotification = () => {
-//     setShowNotification(!showNotification);
-//   };
-
-//   return (
-//     <Box
-//       sx={{
-//         margin: "25px",
-//         borderRadius: "75px",
-//         boxShadow: 3,
-//         marginTop: "10px",
-//         marginBottom: "30px",
-//       }}
-//     >
-//       <AppBar
-//         position="static"
-//         sx={{ background: "#f0f1f2", borderRadius: "25px" }}
-//       >
-//         <Grid
-//           container
-//           alignItems="center"
-//           justifyContent="space-between" // Use space-between to push items to the edges
-//           sx={{ height: "100%" }}
-//         >
-//            <div className="flex items-center"> {/* Container for icon and text */}
-//             <p className="mr-3 font-bold ml-2 text-black text-sm">ID: {device_id}</p>
-//             {!isWorking ?(
-//               <IoAlertCircleSharp className="text-xl ml-2 text-green-500 align-items-start" /> 
-//             ):(
-//               <IoAlertCircleSharp className="text-xl ml-2 text-red-500 align-items-start" /> 
-//             )
-
-//             }
-            
-//             {!isWorking ? (
-//           <p className="ml-1 text-green-500 font-bold text-base">Active</p>
-//         ) : (
-//           <p className="ml-1 text-red-500 font-bold text-base animated-blink">Inactive</p>
-//         )}
-
-
-let next_device_time = parseInt(epoch_time_lastUpdated+((user_set_time*60)+300))
+let next_device_time = parseInt(secondsSinceEpoch+((user_set_time*60)+300))
 let current_time = Math.floor(new Date().getTime() / 1000); 
 
 
 const isWorking = parseFloat(next_device_time) <= parseFloat(current_time);
-
-console.log("current_time",current_time)
-console.log("next updated devices",next_device_time)
-console.log("status",isWorking)
 
 
 function classNames(...classes) {
@@ -110,6 +59,8 @@ function classNames(...classes) {
 const popupnotification = () => {
   setShowNotification(!showNotification);
 };
+
+
 
   return (
     <Box
@@ -128,10 +79,10 @@ const popupnotification = () => {
         <Grid
           container
           alignItems="center"
-          justifyContent="space-between" // Use space-between to push items to the edges
+          justifyContent="space-between" 
           sx={{ height: "100%" }}
         >
-           <div className="flex items-center"> {/* Container for icon and text */}
+           <div className="flex items-center"> 
             <p className="mr-3 font-bold ml-2 text-black text-sm">ID: {device_id}</p>
             {!isWorking ?(
               <IoAlertCircleSharp className="text-xl ml-2 text-green-500 align-items-start" /> 

@@ -98,7 +98,7 @@ const Chart = (chartdata) => {
       },
     },
   };
-  console.log("time",time)
+
   return (
     <div className="chart_page">
       <div id="chart" className="bg-[#42426e] ml-4 mr-4 mt-4 rounded-lg ">

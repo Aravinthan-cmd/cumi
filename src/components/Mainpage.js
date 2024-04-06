@@ -24,7 +24,6 @@ const Mainpage = ({ Device_data, Alldata_list, Device_name, Devicename }) => {
   const device4 = Alldata_list["XY00004"];
   const device5 = Alldata_list["XY00005"];
 
-  console.log(XY00001Data)
 
 
   const device1_data = device1 ? device1.thickness : 'N/A';
@@ -127,8 +126,6 @@ const Mainpage = ({ Device_data, Alldata_list, Device_name, Devicename }) => {
   const handleDeviceClick = (device, thickness) => {
     localStorage.setItem("DeviceId", device);
   };
-
-console.log("data",device4_data_thickness)
 
   const renderGridItems1 = () => {
     return data1.map((item, index) => (
