@@ -262,9 +262,9 @@ console.log("data",device4_data_thickness)
       />
       <div className='flex flex-wrap'>
         <div className='w-full sm:w-1/2 border m-0.2 rounded-lg'>
-          <div className='flex justify-center items-center'>
+          {/* <div className='flex justify-center items-center'>
             <h1 className='font-bold'>MODEL VIEW</h1>
-          </div>
+          </div> */}
           <div className='grid grid-cols-1 lg:grid-cols-4  gap-2' style={{ maxHeight: '45vh', overflowY: 'auto' }}>
             <div className='h-full rounded-r-md bg-[#fce6cac7] border'>
               <div className='flex font-bold bg-[#9e2859] text-rose-50 justify-around'>

@@ -45,21 +45,71 @@ if (device_lastime !== 'N/A') {
 
 
 
+
+// const isWorking = next_device_time <= current_time;
+//   function classNames(...classes) {
+//     return classes.filter(Boolean).join(" ");
+//   }
+
+//   const popupnotification = () => {
+//     setShowNotification(!showNotification);
+//   };
+
+//   return (
+//     <Box
+//       sx={{
+//         margin: "25px",
+//         borderRadius: "75px",
+//         boxShadow: 3,
+//         marginTop: "10px",
+//         marginBottom: "30px",
+//       }}
+//     >
+//       <AppBar
+//         position="static"
+//         sx={{ background: "#f0f1f2", borderRadius: "25px" }}
+//       >
+//         <Grid
+//           container
+//           alignItems="center"
+//           justifyContent="space-between" // Use space-between to push items to the edges
+//           sx={{ height: "100%" }}
+//         >
+//            <div className="flex items-center"> {/* Container for icon and text */}
+//             <p className="mr-3 font-bold ml-2 text-black text-sm">ID: {device_id}</p>
+//             {!isWorking ?(
+//               <IoAlertCircleSharp className="text-xl ml-2 text-green-500 align-items-start" /> 
+//             ):(
+//               <IoAlertCircleSharp className="text-xl ml-2 text-red-500 align-items-start" /> 
+//             )
+
+//             }
+            
+//             {!isWorking ? (
+//           <p className="ml-1 text-green-500 font-bold text-base">Active</p>
+//         ) : (
+//           <p className="ml-1 text-red-500 font-bold text-base animated-blink">Inactive</p>
+//         )}
+
+
 let next_device_time = parseInt(epoch_time_lastUpdated+((user_set_time*60)+300))
 let current_time = Math.floor(new Date().getTime() / 1000); 
 
 
-const isWorking = next_device_time >= current_time;
-const a =!isWorking
+const isWorking = parseFloat(next_device_time) <= parseFloat(current_time);
+
+console.log("current_time",current_time)
+console.log("next updated devices",next_device_time)
+console.log("status",isWorking)
 
 
-  function classNames(...classes) {
-    return classes.filter(Boolean).join("");
-  }
+function classNames(...classes) {
+  return classes.filter(Boolean).join("");
+}
 
-  const popupnotification = () => {
-    setShowNotification(!showNotification);
-  };
+const popupnotification = () => {
+  setShowNotification(!showNotification);
+};
 
   return (
     <Box
@@ -83,15 +133,13 @@ const a =!isWorking
         >
            <div className="flex items-center"> {/* Container for icon and text */}
             <p className="mr-3 font-bold ml-2 text-black text-sm">ID: {device_id}</p>
-            {isWorking === true ?(
+            {!isWorking ?(
               <IoAlertCircleSharp className="text-xl ml-2 text-green-500 align-items-start" /> 
             ):(
               <IoAlertCircleSharp className="text-xl ml-2 text-red-500 align-items-start" /> 
             )
-
             }
-            
-            {isWorking === true ? (
+            {!isWorking ? (
           <p className="ml-1 text-green-500 font-bold text-base">Active</p>
         ) : (
           <p className="ml-1 text-red-500 font-bold text-base animated-blink">Inactive</p>
