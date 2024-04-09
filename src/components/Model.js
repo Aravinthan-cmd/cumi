@@ -7,7 +7,9 @@ import './style.css';
 
 
 const Model = ({alldata_list,device_name}) => {
+
   const [selectedItem, setSelectedItem] = useState(null);
+
   const XY00001Data = device_name.find(item => item.devicename === "XY00001");
   const XY00002Data = device_name.find(item => item.devicename === "XY00002");
   const XY00003Data = device_name.find(item => item.devicename === "XY00003");
@@ -37,40 +39,37 @@ const Model = ({alldata_list,device_name}) => {
   const device5_data = device5 ? device5.thickness : 'N/A';
 
 
-
-  const device1_convert = parseInt(device1_data)
-
+  
+  const device1_convert = parseFloat(device1_data)
   const limitvalue = ((device1_convert-0)*(100-0))/(device1_thickness-0)+0;
   const rounded_value_device1 = limitvalue.toFixed(2);
-  const rounded_percentage_device1 = parseInt(rounded_value_device1);
-  const device1_thickness_int = parseInt(rounded_percentage_device1);
-  const device2_convert = parseInt(device2_data)
+  const rounded_percentage_device1 = parseFloat(rounded_value_device1);
+  const device1_thickness_int = parseFloat(rounded_percentage_device1);
 
-
-  
+  const device2_convert = parseFloat(device2_data)
   const device2_limitvalue2 = ((device2_convert-0)*(100-0))/(device2_thickness-0)+0;
   const rounded_value_device2 = device2_limitvalue2.toFixed(2);
-  const rounded_percentage_device2 = parseInt(rounded_value_device2);
-  const device2_thickness_int = parseInt(rounded_percentage_device2);
+  const rounded_percentage_device2 = parseFloat(rounded_value_device2);
+  const device2_thickness_int = parseFloat(rounded_percentage_device2);
 
-  const device3_convert = parseInt(device3_data)
+  const device3_convert = parseFloat(device3_data)
   const device3_limitvalue2 = ((device3_convert-0)*(100-0))/(device3_thickness-0)+0;
   const rounded_value_device3 = device3_limitvalue2.toFixed(2);
-  const rounded_percentage_device3 = parseInt(rounded_value_device3);
-  const device3_thickness_int = parseInt(rounded_percentage_device3);
+  const rounded_percentage_device3 = parseFloat(rounded_value_device3);
+  const device3_thickness_int = parseFloat(rounded_percentage_device3);
 
-  const device4_convert = parseInt(device4_data)
+  const device4_convert = parseFloat(device4_data)
   const device4_limitvalue2 = ((device4_convert-0)*(100-0))/(device4_thickness-0)+0;
   const rounded_value_devic4 = device4_limitvalue2.toFixed(2);
-  const rounded_percentage_device4 = parseInt(rounded_value_devic4);
-  const device4_thickness_int = parseInt(rounded_percentage_device4);
+  const rounded_percentage_device4 = parseFloat(rounded_value_devic4);
+  const device4_thickness_int = parseFloat(rounded_percentage_device4);
 
 
-  const device5_convert = parseInt(device5_data)
+  const device5_convert = parseFloat(device5_data)
   const device5_limitvalue2 = ((device5_convert-0)*(100-0))/(device5_thickness-0)+0;
   const rounded_value_devic5 = device5_limitvalue2.toFixed(2);
-  const rounded_percentage_device5 = parseInt(rounded_value_devic5);
-  const device5_thickness_int = parseInt(rounded_percentage_device5);
+  const rounded_percentage_device5 = parseFloat(rounded_value_devic5);
+  // const device5_thickness_int = parseFloat(rounded_percentage_device5);
 
 
   const handleColumnClick = async (id) => {
@@ -84,9 +83,6 @@ const Model = ({alldata_list,device_name}) => {
           }
     }
   };
-  const finaly_thickness = device1_data > device1_thickness
-
-
 
 
   const renderColumns = (data) => {
@@ -130,9 +126,9 @@ const Model = ({alldata_list,device_name}) => {
     (parseFloat(device4_data) > device4_thickness === true &&item.id === 'XY00004:')?'bg-sky-400':
     (rounded_percentage_device4 > 75 && item.id === 'XY00004:') ? 'bg-green-500' : ''}
 
-    ${rounded_percentage_device5 < 50 && item.id === 'XY00005:' ? 'bg-red-500' :
-    (device5_thickness_int >= 101 && rounded_percentage_device5 <= 1000 && item.id === 'XY00005:')? 'bg-sky-400':
-    (rounded_percentage_device5 >= 50 && rounded_percentage_device5 <= 75 && item.id === 'XY00005:') ? 'bg-[#ED7014]' :
+    ${rounded_percentage_device5 < parseFloat(50) && item.id === 'XY00005:' ? 'bg-red-500' :
+    (rounded_percentage_device5 >= parseFloat(101) && rounded_percentage_device5 <= parseFloat(1000) && item.id === 'XY00005:')? 'bg-sky-400':
+    (rounded_percentage_device5 >= parseFloat(50) && rounded_percentage_device5 <= parseFloat(75) && item.id === 'XY00005:') ? 'bg-[#ED7014]' :
     (parseFloat(device4_data) > device4_thickness &&item.id === 'XY00005:')?'bg-sky-400':
     (rounded_percentage_device5 > 75 && item.id === 'XY00005:') ? 'bg-green-500' : ''}
     `}

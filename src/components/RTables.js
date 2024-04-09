@@ -16,7 +16,7 @@ const RTables = (device_data) => {
         <div className="py-1 overflow-x-auto  inline-block w-full">
           <div className="overflow-hidden mh-52  table_h lg:h-52 overflow-y-auto md:overflow-y-auto sm:overflow-y-auto lg:overflow-y-auto mr-1 ">
             <table className="min-w-full bg-white border">
-              <thead className="bg-[#9e2859] border-b static">
+              <thead className="bg-[#613522] border-b static">
                 <tr>
                   <th className="text-sm font-medium text-white px-2 py-2">
                     Device Name

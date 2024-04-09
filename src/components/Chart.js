@@ -1,10 +1,6 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
 import Select from 'react-select';
-import { Chart as ChartJS,LineElement,CategoryScale,LinearScale,PointElement } from "chart.js";
-ChartJS.register(
-  LineElement,CategoryScale,LinearScale,PointElement
-)
 
 
 
@@ -61,55 +57,56 @@ const Chart = (chartdata) => {
     localStorage.setItem("ChartId",selectedOption.value)
   }
 
-  const data={
-    labels:time,
-    datasets:[
+  const data = {
+    labels: time,
+    datasets: [
       {
-        data:thickness,
-        backgroundColor:'transparent',
-        borderColor:'#08B8FF',
-        pointBorderColor:'transparent',
+        label: 'Dataset 1',
+        data: thickness,
+        fill: false,
+        borderColor: 'rgb(75, 192, 192)',
+        tension: 0.1
       },
       {
-        data: battery ,
-        backgroundColor: 'transparent',
-        borderColor: '#FF5733', 
-        pointBorderColor: 'transparent',
-      },
+        label: 'Dataset 2',
+        data: battery,
+        fill: false,
+        borderColor: 'rgb(255, 99, 132)',
+        tension: 0.1
+      }
     ]
-  }
-  const options = {
-    scales: {
-      y: {
-        grid: {
-          color: 'rgba(255, 255, 255, 0.2)', // Color of the y-axis grid lines
-        },
-        ticks: {
-          color: '#ffffff', // Color of the y-axis labels
-        },
-      },
-      x: {
-        grid: {
-          color: 'rgba(255, 255, 255, 0.2)', // Color of the x-axis grid lines
-        },
-        ticks: {
-          color: '#ffffff', // Color of the x-axis labels
-        },
-      },
-    },
   };
+  // const data={
+  //   labels:time,
+  //   datasets:[
+  //     {
+  //       data:thickness,
+  //       backgroundColor:'transparent',
+  //       borderColor:'#08B8FF',
+  //       pointBorderColor:'transparent',
+  //     },
+  //     {
+  //       data: battery ,
+  //       backgroundColor: 'transparent',
+  //       borderColor: '#FF5733', 
+  //       pointBorderColor: 'transparent',
+  //     },
+  //   ]
+  // }
+
 
   return (
     <div className="chart_page">
-      <div id="chart" className="bg-[#42426e] ml-4 mr-4 mt-4 rounded-lg ">
+      <div id="chart" className="bg-[#ffffffe7] ml-4 mr-4 mt-4 rounded-lg ">
         <div className="flex justify-center items-center">
           <div className="flex">
-          <h3 className="font-bold mt-2 text-white">Select the DeviceId:</h3>
+          <h3 className="font-bold mt-2 text-black">Select the DeviceId:</h3>
           <Select  className="w-22 ml-2 mt-1 h-10" options={Data_freequences} styles={customStyles_2} isSearchable={true}  placeholder={`${devicename[0]}`} onChange={handle_dropdown_Change} />
           </div>
          
         </div>
-        <Line className="ml-10 w-full h-full" data={data} options={options}></Line>
+   
+        <Line data={data} />
       </div>
     </div>
   );

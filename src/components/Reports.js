@@ -168,7 +168,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { ModeContext } from './ModeContext';
 import xyma from '../imgaes/xyma_blue.png';
-import reportpng from '../imgaes/reports-bg1.png';
+import reportpng from '../imgaes/products.png';
 import Select from 'react-select';
 import axios from 'axios';
 import './style.css';
@@ -176,6 +176,10 @@ import 'jspdf-autotable';
 import { saveAs } from 'file-saver';
 import jsPDF from 'jspdf';
 import * as XLSX from 'xlsx';
+
+import coverImg from '../imgaes/pdfcover.jpg'
+import xymaimg from '../imgaes/xyma_blue.png'
+import disclaimerPage from '../imgaes/disclaimerPage.jpg'
 
 const Reports = () => {
   const [selectedFromDate, setSelectedFromDate] = useState('');
@@ -224,9 +228,6 @@ const Reports = () => {
 
   const handleDownload = async () => {
     try {
-
-
-
       const startDate = new Date(selectedFromDate);
       const endDate = new Date(selectedToDate);
 
@@ -236,8 +237,21 @@ const Reports = () => {
         enddate: endDate
       });
 
+
       const apidata = response.data.data;
       const doc = new jsPDF();
+
+        const logo = xymaimg;
+        const cover = coverImg;
+        // const  desc = sensorPage;
+        const disclaimer = disclaimerPage;
+
+         //cover img  
+         doc.addImage(cover, 'JPG',0,0,210,297);
+         doc.addPage();
+ 
+
+
             const tableHeaders = [
               ['Device', 'Thickness', 'Battery', 'Device Temp', 'Time'],
             ];
@@ -259,21 +273,13 @@ const Reports = () => {
               head: tableHeaders,
               body: tableData,
             });
+
+            doc.addImage(disclaimer,'PNG',0,50,210,250)
             // Save the PDF
            const blob = doc.output('blob');
-
-        // Create a URL for the Blob
         const url = URL.createObjectURL(blob);
 
-        // Open the PDF in a new tab or window
         window.open(url, '_blank');
-
-      // const worksheet = XLSX.utils.json_to_sheet(apidata);
-      // const workbook = XLSX.utils.book_new();
-      // XLSX.utils.book_append_sheet(workbook, worksheet, 'Data');
-      // const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
-
-      // saveAs(new Blob([excelBuffer], { type: 'application/octet-stream' }), 'data.xlsx');
     } catch (error) {
       console.error('Error generating Excel:', error);
     }
@@ -339,7 +345,7 @@ const Reports = () => {
           </div>
         </div>
         <div className="flex flex-col items-center md:items-end w-full md:w-1/2 mt-4 md:mt-0">
-          <img src={reportpng} style={{ width: '80vh', maxWidth: '100%' }} alt="Report" />
+          <img src={reportpng} style={{ width: '60vh', maxWidth: '100%' }} alt="Report" />
         </div>
       </div>
     </div>

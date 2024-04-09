@@ -20,7 +20,6 @@ const Router = () => {
 
   useEffect(() => {
     fetchData();
-    
     datas();
     const data = setInterval(fetchData, 2000);
     const thickness_data =setInterval(datas,2000);

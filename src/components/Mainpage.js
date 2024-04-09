@@ -127,6 +127,7 @@ const Mainpage = ({ Device_data, Alldata_list, Device_name, Devicename }) => {
     localStorage.setItem("DeviceId", device);
   };
 
+
   const renderGridItems1 = () => {
     return data1.map((item, index) => (
       <div key={index} className='grid grid-cols-2'>
@@ -143,25 +144,25 @@ const Mainpage = ({ Device_data, Alldata_list, Device_name, Devicename }) => {
             parseFloat(rounded_value_device2) < parseFloat(50) && item.id === 'XY00002' ? 'bg-red-500' :
             device2_data_thickness === true && item.id === 'XY00002' ? 'bg-[#0A99DF]' :
             parseFloat(rounded_value_device2) >= parseFloat(75) && device2_data_thickness === false && item.id === 'XY00002' ? 'bg-green-500' :
-            parseFloat(rounded_value_device2) >= parseFloat(51) && parseFloat(rounded_value_device1) <= parseFloat(75) && item.id === 'XY00002' ? 'bg-[#ED7014]' :
+            parseFloat(rounded_value_device2) >= parseFloat(50) && parseFloat(rounded_value_device1) < parseFloat(75) && item.id === 'XY00002' ? 'bg-[#ED7014]' :
             item.id === 'XY00002' ? 'bg-white' :
 
-            parseFloat(rounded_value_device3) <= parseFloat(50) && item.id === 'XY00003' ? 'bg-red-500' :
+            parseFloat(rounded_value_device3) < parseFloat(50) && item.id === 'XY00003' ? 'bg-red-500' :
             device3_data_thickness === true && item.id === 'XY00003' ? 'bg-[#0A99DF]' :
             parseFloat(rounded_value_device3) >= parseFloat(75) && device3_data_thickness === false && item.id === 'XY00003' ? 'bg-green-500' :
-            parseFloat(rounded_value_device3) >= parseFloat(51) && parseFloat(rounded_value_device3) <= parseFloat(75) && item.id === 'XY00003' ? 'bg-[#ED7014]' :
+            parseFloat(rounded_value_device3) >= parseFloat(50) && parseFloat(rounded_value_device3) < parseFloat(75) && item.id === 'XY00003' ? 'bg-[#ED7014]' :
             item.id === 'XY00003' ? 'bg-white' :
 
-            parseFloat(rounded_value_device4) <= parseFloat(50) && item.id === 'XY00004' ? 'bg-red-500' :
+            parseFloat(rounded_value_device4) < parseFloat(50) && item.id === 'XY00004' ? 'bg-red-500' :
             device4_data_thickness === true && item.id === 'XY00004' ? 'bg-[#0A99DF]' :
             parseFloat(rounded_value_device4) >= parseFloat(75) && device4_data_thickness === false && item.id === 'XY00004' ? 'bg-green-500' :
-            parseFloat(rounded_value_device4) >= parseFloat(51) && parseFloat(rounded_value_device4) <= parseFloat(75) && item.id === 'XY00004' ? 'bg-[#ED7014]' :
+            parseFloat(rounded_value_device4) >= parseFloat(50) && parseFloat(rounded_value_device4) < parseFloat(75) && item.id === 'XY00004' ? 'bg-[#ED7014]' :
             item.id === 'XY00004' ? 'bg-white' :
 
             parseFloat(rounded_value_device5) < parseFloat(50) && item.id === 'XY00005' ? 'bg-red-500' :
             device5_data_thickness === true && item.id === 'XY00005' ? 'bg-[#0A99DF]' :
             parseFloat(rounded_value_device5) >= parseFloat(75) && device5_data_thickness === false && item.id === 'XY00005' ? 'bg-green-500' :
-            parseFloat(rounded_value_device5) >= parseFloat(51) && parseFloat(rounded_value_device5) <= parseFloat(75) && item.id === 'XY00005' ? 'bg-[#ED7014]' :
+            parseFloat(rounded_value_device5) >= parseFloat(50) && parseFloat(rounded_value_device5) < parseFloat(75) && item.id === 'XY00005' ? 'bg-[#ED7014]' :
             item.id === 'XY00005' ? 'bg-white' :
           'bg-white' 
           }
@@ -188,25 +189,25 @@ const Mainpage = ({ Device_data, Alldata_list, Device_name, Devicename }) => {
            parseFloat(rounded_value_device2) < parseFloat(50) && item.id === 'XY00002' ? 'bg-red-500' :
            device2_data_thickness === true && item.id === 'XY00002' ? 'bg-[#0A99DF]' :
            parseFloat(rounded_value_device2) >= parseFloat(75) && device2_data_thickness === false && item.id === 'XY00002' ? 'bg-green-500' :
-           parseFloat(rounded_value_device2) >= parseFloat(51) && parseFloat(rounded_value_device1) <= parseFloat(75) && item.id === 'XY00002' ? 'bg-[#ED7014]' :
+           parseFloat(rounded_value_device2) >= parseFloat(50) && parseFloat(rounded_value_device1) < parseFloat(75) && item.id === 'XY00002' ? 'bg-[#ED7014]' :
            item.id === 'XY00002' ? 'bg-white' :
 
            parseFloat(rounded_value_device3) <= parseFloat(50) && item.id === 'XY00003' ? 'bg-red-500' :
            device3_data_thickness === true && item.id === 'XY00003' ? 'bg-[#0A99DF]' :
            parseFloat(rounded_value_device3) >= parseFloat(75) && device3_data_thickness === false && item.id === 'XY00003' ? 'bg-green-500' :
-           parseFloat(rounded_value_device3) >= parseFloat(51) && parseFloat(rounded_value_device3) <= parseFloat(75) && item.id === 'XY00003' ? 'bg-[#ED7014]' :
+           parseFloat(rounded_value_device3) >= parseFloat(50) && parseFloat(rounded_value_device3) < parseFloat(75) && item.id === 'XY00003' ? 'bg-[#ED7014]' :
            item.id === 'XY00003' ? 'bg-white' :
 
            parseFloat(rounded_value_device4) <= parseFloat(50) && item.id === 'XY00004' ? 'bg-red-500' :
            device4_data_thickness === true && item.id === 'XY00004' ? 'bg-[#0A99DF]' :
            parseFloat(rounded_value_device4) >= parseFloat(75) && device4_data_thickness === false && item.id === 'XY00004' ? 'bg-green-500' :
-           parseFloat(rounded_value_device4) >= parseFloat(51) && parseFloat(rounded_value_device4) <= parseFloat(75) && item.id === 'XY00004' ? 'bg-[#ED7014]' :
+           parseFloat(rounded_value_device4) >= parseFloat(50) && parseFloat(rounded_value_device4) < parseFloat(75) && item.id === 'XY00004' ? 'bg-[#ED7014]' :
            item.id === 'XY00004' ? 'bg-white' :
 
            parseFloat(rounded_value_device5) < parseFloat(50) && item.id === 'XY00005' ? 'bg-red-500' :
            device5_data_thickness === true && item.id === 'XY00005' ? 'bg-[#0A99DF]' :
            parseFloat(rounded_value_device5) >= parseFloat(75) && device5_data_thickness === false && item.id === 'XY00005' ? 'bg-green-500' :
-           parseFloat(rounded_value_device5) >= parseFloat(51) && parseFloat(rounded_value_device5) <= parseFloat(75) && item.id === 'XY00005' ? 'bg-[#ED7014]' :
+           parseFloat(rounded_value_device5) >= parseFloat(50) && parseFloat(rounded_value_device5) < parseFloat(75) && item.id === 'XY00005' ? 'bg-[#ED7014]' :
            item.id === 'XY00005' ? 'bg-white' :
 
 
@@ -264,34 +265,33 @@ const Mainpage = ({ Device_data, Alldata_list, Device_name, Devicename }) => {
           </div> */}
           <div className='grid grid-cols-1 lg:grid-cols-4  gap-2' style={{ maxHeight: '45vh', overflowY: 'auto' }}>
             <div className='h-full rounded-r-md bg-[#fce6cac7] border'>
-              <div className='flex font-bold bg-[#9e2859] text-rose-50 justify-around'>
+              <div className='flex font-bold bg-[#613522] text-rose-50 justify-around'>
                 <div>Thickness</div>
                 <div>Device</div>
               </div>
               {renderGridItems1()}
             </div>
             <div className='h-full rounded-r-md bg-[#fce6cac7] border'>
-              <div className='flex font-bold bg-[#9e2859] text-rose-50 justify-around'>
+              <div className='flex font-bold bg-[#613522] text-rose-50 justify-around'>
                 <div>Thickness</div>
                 <div>Device</div>
               </div>
               {renderGridItems2()}
             </div>
             <div className='h-full rounded-r-md bg-[#fce6cac7] border'>
-              <div className='flex font-bold bg-[#9e2859] text-rose-50 justify-around'>
+              <div className='flex font-bold bg-[#613522] text-rose-50 justify-around'>
                 <div>Thickness</div>
                 <div>Device</div>
               </div>
               {renderGridItems3()}
             </div>
             <div className='h-full rounded-r-md bg-[#fce6cac7] border'>
-              <div className='flex font-bold bg-[#9e2859] text-rose-50 justify-around'>
+              <div className='flex font-bold bg-[#613522] text-rose-50 justify-around'>
                 <div>Thickness</div>
                 <div>Device</div>
               </div>
               {renderGridItems4()}
             </div>
-       
           </div>
         </div>
         <div className='w-full sm:w-1/2'>
@@ -304,7 +304,6 @@ const Mainpage = ({ Device_data, Alldata_list, Device_name, Devicename }) => {
       <div className='flex flex-wrap'>
         <div className='w-full sm:w-1/2'>
         <RTables device_data={Device_data} />
-
         </div>
         <div className='w-full sm:w-1/2'>
         <Charts device_data={Device_data} />
