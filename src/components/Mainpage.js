@@ -144,7 +144,7 @@ const Mainpage = ({ Device_data, Alldata_list, Device_name, Devicename }) => {
             parseFloat(rounded_value_device2) < parseFloat(50) && item.id === 'XY00002' ? 'bg-red-500' :
             device2_data_thickness === true && item.id === 'XY00002' ? 'bg-[#0A99DF]' :
             parseFloat(rounded_value_device2) >= parseFloat(75) && device2_data_thickness === false && item.id === 'XY00002' ? 'bg-green-500' :
-            parseFloat(rounded_value_device2) >= parseFloat(50) && parseFloat(rounded_value_device1) < parseFloat(75) && item.id === 'XY00002' ? 'bg-[#ED7014]' :
+            parseFloat(rounded_value_device2) >= parseFloat(50) && parseFloat(rounded_value_device2) < parseFloat(75) && item.id === 'XY00002' ? 'bg-[#ED7014]' :
             item.id === 'XY00002' ? 'bg-white' :
 
             parseFloat(rounded_value_device3) < parseFloat(50) && item.id === 'XY00003' ? 'bg-red-500' :
@@ -184,12 +184,12 @@ const Mainpage = ({ Device_data, Alldata_list, Device_name, Devicename }) => {
            parseFloat(rounded_value_device1) >= parseFloat(75) && device1_data_thickness === false && item.id === 'XY00001' ? 'bg-green-500' :
            parseFloat(rounded_value_device1) >= parseFloat(50) && parseFloat(rounded_value_device1) < parseFloat(75) && item.id === 'XY00001' ? 'bg-[#ED7014]' :
            item.id === 'XY00001' ? 'bg-white' :
-           // Condition for device 5
 
+           // Condition for device 5
            parseFloat(rounded_value_device2) < parseFloat(50) && item.id === 'XY00002' ? 'bg-red-500' :
            device2_data_thickness === true && item.id === 'XY00002' ? 'bg-[#0A99DF]' :
            parseFloat(rounded_value_device2) >= parseFloat(75) && device2_data_thickness === false && item.id === 'XY00002' ? 'bg-green-500' :
-           parseFloat(rounded_value_device2) >= parseFloat(50) && parseFloat(rounded_value_device1) < parseFloat(75) && item.id === 'XY00002' ? 'bg-[#ED7014]' :
+           parseFloat(rounded_value_device2) >= parseFloat(50) && parseFloat(rounded_value_device2) < parseFloat(75) && item.id === 'XY00002' ? 'bg-[#ED7014]' :
            item.id === 'XY00002' ? 'bg-white' :
 
            parseFloat(rounded_value_device3) <= parseFloat(50) && item.id === 'XY00003' ? 'bg-red-500' :
@@ -210,8 +210,7 @@ const Mainpage = ({ Device_data, Alldata_list, Device_name, Devicename }) => {
            parseFloat(rounded_value_device5) >= parseFloat(50) && parseFloat(rounded_value_device5) < parseFloat(75) && item.id === 'XY00005' ? 'bg-[#ED7014]' :
            item.id === 'XY00005' ? 'bg-white' :
 
-
-          'bg-white' 
+          'bg-white'
         }
         rounded-r-md hover:border-[#2d2d2d] flex text-sm font-bold justify-center m-2 border-2 cursor-pointer`}
         // onClick={() => handleDeviceClick(item.id, item.thickness)}
@@ -221,8 +220,6 @@ const Mainpage = ({ Device_data, Alldata_list, Device_name, Devicename }) => {
       </div>
     ));
   };
-  
-  
   
 
   const renderGridItems2 = () => {

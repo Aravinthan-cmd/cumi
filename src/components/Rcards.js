@@ -31,7 +31,7 @@ const Data_freequences = [
   { label: '5 Min', value: '5' },
   { label: '1 Hrs', value: '60' },
   { label: '1 Day', value: '1440' },
-  { label: '2 Days', value: '2880' },
+  // { label: '2 Days', value: '2880' },
   { label: '7 Days', value: '10080' },
   { label: '15 Days', value: '21600' },
 ];

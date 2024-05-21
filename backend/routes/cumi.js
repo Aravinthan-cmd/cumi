@@ -1,5 +1,5 @@
 import express from 'express'
-import { register,
+import {register,
     login,DeviceName,input,
     limit,limitdata,
     LastUpdated_data,fetchAllData,insertData,BulkData,
@@ -7,12 +7,8 @@ devicelast_datas,getdata,devicedata} from "../controller/alldata.js";
 
 const router = express.Router();
 
-
-
-
 router.get("/fetchAllData",fetchAllData)
 router.post("/input",input)
-
 
 //fetch chart value api missing
 router.get('/deviceData',devicedata)
@@ -26,8 +22,5 @@ router.get("/LastUpdated_data",LastUpdated_data)
 router.get("/insertData",insertData)//useful
 router.get('/devicelast_datas',devicelast_datas)
 router.post('/getdata',getdata)
-
-
-
 
 export default router;
