@@ -7,7 +7,6 @@ import Charts from './Charts';
 import Dashboard from './Dashboard';
 import Navbar from './Navbar';
 import axios from 'axios';
-import { ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 
 const Mainpage = ({ Device_data, Alldata_list, Device_name, Devicename }) => {
@@ -24,8 +23,6 @@ const Mainpage = ({ Device_data, Alldata_list, Device_name, Devicename }) => {
   const device4 = Alldata_list["XY00004"];
   const device5 = Alldata_list["XY00005"];
 
-
-
   const device1_data = device1 ? device1.thickness : 'N/A';
   const device2_data = device2 ? device2.thickness : 'N/A';
   const device3_data = device3 ? device3.thickness : 'N/A';
@@ -38,13 +35,11 @@ const Mainpage = ({ Device_data, Alldata_list, Device_name, Devicename }) => {
   const device4_thickness = parseFloat(XY00004Data ?XY00004Data.limit  :"N/A");
   const device5_thickness = parseFloat(XY00005Data ?XY00005Data.limit  :"N/A");
 
-
   const device1_convert = parseFloat(device1_data)
   const device2_convert = parseFloat(device2_data)
   const device3_convert = parseFloat(device3_data)
   const device4_convert = parseFloat(device4_data)
   const device5_convert = parseFloat(device5_data)
-
 
   const device1_percentage = ((device1_convert - 0)*(100-0))/(device1_thickness-0)+0;
   const device2_percentage = ((device2_convert - 0)*(100-0))/(device2_thickness-0)+0;
@@ -133,7 +128,7 @@ const Mainpage = ({ Device_data, Alldata_list, Device_name, Devicename }) => {
       <div key={index} className='grid grid-cols-2'>
         <div className={`
           ${
-        
+
             parseFloat(rounded_value_device1) < parseFloat(50) && item.id === 'XY00001' ? 'bg-red-500' :
             device1_data_thickness === true && item.id === 'XY00001' ? 'bg-[#0A99DF]' :
             parseFloat(rounded_value_device1) >= parseFloat(75) && device1_data_thickness === false && item.id === 'XY00001' ? 'bg-green-500' :
@@ -171,7 +166,6 @@ const Mainpage = ({ Device_data, Alldata_list, Device_name, Devicename }) => {
           rounded-r-md hover:border-[#2d2d2d] flex justify-center m-2 border-2 text-sm font-bold  cursor-pointer`}
           onClick={() => handleDeviceClick(item.id, item.thickness)}
         >
-    
           {item.thickness}
         </div>
   

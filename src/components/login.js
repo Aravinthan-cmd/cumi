@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import xyma from "../imgaes/xyma_blue.png";
 import { useNavigate } from 'react-router-dom';
-import cumi from '../imgaes/cumi_login.png'
+import cumi from '../imgaes/cumi_login.png';
 import './style.css';
 
 const Login = () => {
@@ -12,7 +12,7 @@ const Login = () => {
         const password = document.getElementById('password').value;
 
         try {
-            const response = await fetch('https://cumi.xyma.live/backend/login', {
+            const response = await fetch('http://15.206.193.179:4000/backend/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

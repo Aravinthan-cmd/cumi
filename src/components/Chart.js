@@ -18,12 +18,7 @@ const Chart = (chartdata) => {
     return Battery_percentage; 
   });
 
-
-
-  
-
   const time = filterdata.map(item => item.timestamp);
-
   
   const Data_freequences = [
     { label: 'XY00001', value: 'XY00001' },
@@ -35,14 +30,11 @@ const Chart = (chartdata) => {
   const customStyles_2 = {
     control: (provided) => ({
       ...provided,
-      // backgroundColor: '#2d2d2d',
       borderColor:'#2d2d2d',
       color: 'black',
     }),
     option: (provided, state) => ({
       ...provided,
-      
-  
     }),
     menu: (provided) => ({
       ...provided,
@@ -56,6 +48,10 @@ const Chart = (chartdata) => {
   const handle_dropdown_Change = async(selectedOption) => {
     localStorage.setItem("ChartId",selectedOption.value)
   }
+
+  time.reverse();
+  thickness.reverse();
+  battery.reverse();
 
   const data = {
     labels: time,
@@ -103,9 +99,7 @@ const Chart = (chartdata) => {
           <h3 className="font-bold mt-2 text-black">Select the DeviceId:</h3>
           <Select  className="w-22 ml-2 mt-1 h-10" options={Data_freequences} styles={customStyles_2} isSearchable={true}  placeholder={`${devicename[0]}`} onChange={handle_dropdown_Change} />
           </div>
-         
         </div>
-   
         <Line data={data} />
       </div>
     </div>
